@@ -1,0 +1,89 @@
+version: '3'
+
+vars:
+  BINARY_NAME: telegram
+  BUILD_DIR: ./back/bin
+  TMP_DIR: ./back/tmp
+  CSS_SOURCE: ./front/src/index.css
+  CSS_TARGET: ./front/public/styles.css
+  TEMPL_DIR: ./front
+
+tasks:
+  default:
+    cmds:
+      - task: back:build
+      - task: back:css
+      - task: back:templ
+      - task: front:build
+    desc: Default task to build the project, generate CSS, format templates, and build front-end
+
+  back:build:
+    cmds:
+      - echo "Building Go binary..."
+      - cd back && go build -o {{.BUILD_DIR}}/{{.BINARY_NAME}} .
+      - echo "Build complete."
+    desc: Build the Go binary for the back-end
+
+  back:clean:
+    cmds:
+      - echo "Cleaning up..."
+      - rm -rf {{.BUILD_DIR}} {{.TMP_DIR}}
+      - echo "Cleanup complete."
+    desc: Clean up build and temporary directories for the back-end
+
+  back:css:
+    cmds:
+      - echo "Checking if CSS source exists..."
+      - test -f {{.CSS_SOURCE}} && echo "CSS source exists." || (echo "CSS source does not exist. Please check the path." && exit 1)
+      - echo "Generating CSS with TailwindCSS..."
+      - tailwindcss -i {{.CSS_SOURCE}} -o {{.CSS_TARGET}}
+      - echo "CSS generation complete."
+    desc: Generate CSS with TailwindCSS for the front-end
+
+  back:css-dev:
+    cmds:
+      - echo "Generating CSS with TailwindCSS in development mode..."
+      - tailwindcss -i {{.CSS_SOURCE}} -o {{.CSS_TARGET}} --watch
+      - echo "CSS generation complete."
+    desc: Generate CSS with TailwindCSS in development mode
+
+  back:templ:
+    cmds:
+      - echo "Formatting and generating templates..."
+      - templ fmt {{.TEMPL_DIR}}
+      - templ generate
+      - echo "Template formatting and generation complete."
+    desc: Format and generate templates for the front-end
+
+  back:deps:
+    cmds:
+      - echo "Installing back-end dependencies..."
+      - cd back && go get -u -d -v ./...
+      - cd back && go mod tidy
+      - echo "Back-end dependencies installed."
+    desc: Install back-end dependencies
+
+  front:dev:
+    desc: "Run the front-end development server"
+    cmds:
+      - cd front && deno task dev
+
+  front:build:
+    desc: "Build the front-end project for production"
+    cmds:
+      - cd front && deno task build
+
+  front:test:
+    desc: "Run front-end tests"
+    cmds:
+      - cd front && deno task test
+
+  back:dev:
+    desc: "Run the back-end development server"
+    cmds:
+      - deno run -A back/main.ts # Adjust the path to your back-end entry file
+
+  back:test:
+    desc: "Run back-end tests"
+    cmds:
+      - deno run -A back/test.ts # Adjust the path to your back-end test file 

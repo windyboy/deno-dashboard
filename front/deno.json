@@ -1,0 +1,15 @@
+{
+  "task": {
+    "dev": "deno run -A src/index.tsx",
+    "build": "deno run -A npm:vite build",
+    "test": "deno run -A npm:test"
+  },
+  "imports": {
+    "@solidjs/router": "npm:@solidjs/router@^0.15.3"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "solid-js",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"]
+  }
+}

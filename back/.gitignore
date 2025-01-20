@@ -1,0 +1,61 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node modules
+node_modules/
+
+# Deno cache
+deno_cache/
+deno_dir/
+
+# Build output
+dist/
+build/
+bin/
+tmp/
+*.local
+
+# Go binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go build artifacts
+*.out
+*.test
+*.prof
+
+# Editor directories and files
+.vscode/
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Tailwind CSS
+public/styles.css
+
+# Other
+*.tmp
+*.bak
+
+# Ignore generated files ending with _templ.go
+**/*_templ.go
+
+go.sum
