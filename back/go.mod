@@ -7,7 +7,6 @@ toolchain go1.23.4
 require (
 	github.com/ThreeDotsLabs/watermill v1.4.4
 	github.com/ThreeDotsLabs/watermill-nats/v2 v2.1.2
-	github.com/a-h/templ v0.3.819
 	github.com/gorilla/websocket v1.5.3
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.13.3
