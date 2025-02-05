@@ -1,35 +1,12 @@
-import { createSignal } from 'solid-js'
-import solidLogo from './assets/solid.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import MessageComponent from './components/Message';
 
-function App() {
-  const [count, setCount] = createSignal(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://solidjs.com" target="_blank">
-          <img src={solidLogo} class="logo solid" alt="Solid logo" />
-        </a>
-      </div>
-      <h1>Vite + Solid</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count()}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p class="read-the-docs">
-        Click on the Vite and Solid logos to learn more
-      </p>
-    </>
-  )
-}
+    <div class="max-w-4xl mx-auto p-5 h-screen flex flex-col items-center justify-center">
+      <h1 class="text-2xl font-bold mb-4">实时消息窗口</h1>
+      <MessageComponent wsUrl="ws://localhost:8765" height="h-[500px]" width="w-full max-w-[90vw]" />
+    </div>
+  );
+};
 
-export default App
+export default App;

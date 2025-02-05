@@ -59,3 +59,5 @@ public/styles.css
 **/*_templ.go
 
 go.sum
+
+bun.lock
