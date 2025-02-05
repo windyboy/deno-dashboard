@@ -7,8 +7,6 @@ import (
 	"os"
 	"time"
 
-	"casstm-dashboard/handlers"
-
 	"github.com/gorilla/websocket"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
@@ -52,7 +50,7 @@ func main() {
 	// e.Use(middleware.Logger())
 	e.Static("/public", "public")
 	e.GET("/ws", wsHandler)
-	handlers.SetupRoutes(e)
+	// handlers.SetupRoutes(e)
 	// slog.Info("Starting server...", "listenAddr", listenAddr)
 	// if err := http.ListenAndServe(listenAddr, router); err != nil {
 	// 	slog.Error("Error starting server", "err", err)
