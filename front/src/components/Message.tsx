@@ -1,9 +1,17 @@
 import { createSignal, onCleanup, onMount, For, createEffect } from 'solid-js';
 
-const MessageComponent = ({ wsUrl, height = 'h-[400px]', width = 'w-full max-w-[90vw]' }) => {
+const MessageComponent = ({ 
+  wsUrl,
+  height = 'h-[400px]', 
+  width = 'w-full max-w-[90vw]' 
+}: {
+  wsUrl: string;
+  height?: string;
+  width?: string;
+}) => {
   const [messages, setMessages] = createSignal<string[]>([]);
   const [connectionStatus, setConnectionStatus] = createSignal('连接中...');
-  let messagesEndRef: HTMLDivElement;
+  let messagesEndRef: HTMLDivElement | undefined;
 
   onMount(() => {
     const ws = new WebSocket(wsUrl);
@@ -35,7 +43,7 @@ const MessageComponent = ({ wsUrl, height = 'h-[400px]', width = 'w-full max-w-[
 
   // 自动滚动到最新消息
   createEffect(() => {
-    if (messages().length > 0) {
+    if (messages().length > 0 && messagesEndRef) {
       messagesEndRef.scrollIntoView({ behavior: 'smooth' });
     }
   });
@@ -52,7 +60,7 @@ const MessageComponent = ({ wsUrl, height = 'h-[400px]', width = 'w-full max-w-[
         class={`${width} ${height} overflow-y-auto border border-gray-300 p-4 bg-gray-50 rounded-lg shadow-sm`}
       >
         <For each={messages()}>
-          {(message, index) => (
+          {(message) => (
             <div class="mb-4 p-2 bg-white border border-gray-200 rounded-md break-words">
               {message}
             </div>

@@ -45,7 +45,11 @@ func main() {
 	// router.Handle("/*", public())
 	// router.Get("/", handlers.Process(handlers.HandleHome))
 	// fmt.Println("Hello, world!")
+	// give listenAddr a default value
 	listenAddr := os.Getenv("LISTEN_ADDR")
+	if listenAddr == "" {
+		listenAddr = ":8765"
+	}
 	e := echo.New()
 	// e.Use(middleware.Logger())
 	e.Static("/public", "public")
