@@ -57,11 +57,11 @@ const MessageComponent = ({
 
       {/* 消息窗口 */}
       <div
-        class={`${width} ${height} overflow-y-auto border border-gray-300 p-4 bg-gray-50 rounded-lg shadow-sm`}
+        class={`${width} ${height} overflow-y-auto border border-gray-300 p-4 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-shadow`}
       >
         <For each={messages()}>
           {(message) => (
-            <div class="mb-4 p-2 bg-white border border-gray-200 rounded-md break-words text-blue-600">
+            <div class="mb-4 p-2 bg-white border border-gray-200 rounded-md break-words text-blue-600 shadow-sm">
               {message}
             </div>
           )}
