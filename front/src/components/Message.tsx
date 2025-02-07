@@ -61,7 +61,7 @@ const MessageComponent = ({
       >
         <For each={messages()}>
           {(message) => (
-            <div class="mb-4 p-2 bg-white border border-gray-200 rounded-md break-words">
+            <div class="mb-4 p-2 bg-white border border-gray-200 rounded-md break-words text-blue-600">
               {message}
             </div>
           )}
